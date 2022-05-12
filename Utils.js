@@ -12,3 +12,5 @@ function writeUsers(newUser) {
     const stringifiedUsers = JSON.stringify(newUser);
     fs.writeFileSync("./data/users.json", stringifiedUsers);
 }
+
+module.exports = { readUsers, writeUsers };
