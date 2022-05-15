@@ -11,6 +11,12 @@ router.get("/", (_req, res) => {
     res.status(200).json(usersData);
 });
 
+// Create new user
+router.post("/signup", (req, res) => {
+    const { firstName, lastName, username, password } = req.body;
+    console.log( firstName, lastName, username, password );
+})
+
 // Will take in user login POST request and make sure they match data
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
@@ -24,9 +30,7 @@ router.post("/login", (req, res) => {
     const dataBase = utils.readUsers();
     let foundUsername = dataBase.find((userName) => username === userName.username);
     let selectedUser = [foundUsername.username, foundUsername.password, foundUsername.id];
-    // let foundPassword = dataBase.find((passWord) => password === passWord.password);
 
-    // res.send(foundUsername.password);
     // Conditional to see if they match
     if ((selectedUser.includes(username)) && (!selectedUser.includes(password))) {
         return res.status(400).send("Invalid login attempt");
