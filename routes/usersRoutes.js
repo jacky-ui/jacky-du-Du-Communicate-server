@@ -3,13 +3,37 @@ const router = express.Router();
 const uniqid = require("uniqid");
 router.use(express.json());
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
 const utils = require("../utils");
 
-// GET user data from JSON
-router.get("/", (_req, res) => {
+// Create new user
+router.post("/signup", (req, res) => {
+    const { firstName, lastName, username, password } = req.body;
+    console.log( firstName, lastName, username, password );
+
+    if (!firstName || !lastName || !username || !password) {
+        return res.status(400).send("Please enter all required fields!")
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 12);
+    console.log(hashedPassword);
+    
     const usersData = utils.readUsers();
-    res.status(200).json(usersData);
-});
+
+    const newUser = {
+        id: uniqid(),
+        firstname: firstName,
+        lastname: lastName,
+        username: username,
+        password: hashedPassword
+    }
+    console.log(newUser);
+    utils.writeUsers(usersData);
+    usersData.push(newUser);
+    utils.writeUsers(usersData);
+
+    res.status(201).send("Account created!");
+})
 
 // Will take in user login POST request and make sure they match data
 router.post("/login", (req, res) => {
@@ -24,9 +48,7 @@ router.post("/login", (req, res) => {
     const dataBase = utils.readUsers();
     let foundUsername = dataBase.find((userName) => username === userName.username);
     let selectedUser = [foundUsername.username, foundUsername.password, foundUsername.id];
-    // let foundPassword = dataBase.find((passWord) => password === passWord.password);
 
-    // res.send(foundUsername.password);
     // Conditional to see if they match
     if ((selectedUser.includes(username)) && (!selectedUser.includes(password))) {
         return res.status(400).send("Invalid login attempt");
