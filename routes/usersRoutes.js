@@ -6,12 +6,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const utils = require("../utils");
 
-// GET user data from JSON
-router.get("/", (_req, res) => {
-    const usersData = utils.readUsers();
-    res.status(200).json(usersData);
-});
-
 // Create new user
 router.post("/signup", (req, res) => {
     const { firstName, lastName, username, password } = req.body;
@@ -23,6 +17,22 @@ router.post("/signup", (req, res) => {
 
     const hashedPassword = bcrypt.hashSync(password, 12);
     console.log(hashedPassword);
+    
+    const usersData = utils.readUsers();
+
+    const newUser = {
+        id: uniqid(),
+        firstname: firstName,
+        lastname: lastName,
+        username: username,
+        password: hashedPassword
+    }
+    console.log(newUser);
+    utils.writeUsers(usersData);
+    usersData.push(newUser);
+    utils.writeUsers(usersData);
+
+    res.status(201).send("Account created!");
 })
 
 // Will take in user login POST request and make sure they match data
