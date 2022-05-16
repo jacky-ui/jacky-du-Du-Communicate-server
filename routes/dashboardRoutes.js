@@ -9,7 +9,6 @@ const authenticate = require('../middleware/authenticate');
 
 // GET request for current user information
 router.get("/:userId", authenticate, (req, res) => {
-    console.log(req.params.userId);
     const incomingId = req.params.userId;
 
     // Compare and find id of current user vs database
@@ -19,8 +18,6 @@ router.get("/:userId", authenticate, (req, res) => {
 
     // Found matching user but do not want to send over password. Take out password
     delete foundUser["password"];
-
-    console.log(foundUser);
 
     res.status(200).send(foundUser);
 })
