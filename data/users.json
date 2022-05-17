@@ -51,5 +51,12 @@
         "username": "brainstation",
         "password": "$2b$12$c.Qm3y6dUwAnx2XF4BXZjOmcIFSCBl2QVktYYKUGhg4g6hlLlQXSq",
         "profile": "http://localhost:8080/images/default-picture.jpg"
+    }, {
+        "id": "tthwyf7gl38rm6u5",
+        "firstname": "testing",
+        "lastname": "testing",
+        "username": "testing123",
+        "password": "$2b$12$jr/fEA4ovUE2dHzq.hDvOu7NEf4Yh/3jnaoxzTmfRBGS5vqVy.XfO",
+        "profile": "http://localhost:8080/images/default-picture.jpg"
     }
 ]
