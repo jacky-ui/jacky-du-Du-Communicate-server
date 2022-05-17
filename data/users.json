@@ -4,45 +4,59 @@
         "firstname": "Patrick",
         "lastname": "Star",
         "username": "patrickstar",
-        "password": "$2b$12$kihl4LYGgiOTxzZ5khn9EeXLjn2pK3OFm2i48wjPj5uidyAgWAz6e"
+        "password": "$2b$12$kihl4LYGgiOTxzZ5khn9EeXLjn2pK3OFm2i48wjPj5uidyAgWAz6e",
+        "profile": "http://localhost:8080/images/patrick.jpg"
     },
     {
         "id": "tthwyebol37dnmu6",
         "firstname": "Fish ",
         "lastname": "Taco",
         "username": "fishtaco",
-        "password": "$2b$12$nMGTAF21GcjBZOnXq6NziOfIQyHZyKcHfAfxbqiaqvPZ6eEHYIp2y"
+        "password": "$2b$12$nMGTAF21GcjBZOnXq6NziOfIQyHZyKcHfAfxbqiaqvPZ6eEHYIp2y",
+        "profile": "http://localhost:8080/images/fish-taco.jpg"
     },
     {
         "id": "tthwychwl37do18a",
         "firstname": "John",
         "lastname": "Doe",
         "username": "john_doe",
-        "password": "$2b$12$xquMWGaUHpvncN0xuohWFOtgJ4ruQj7RaTfTRSDlVN23qyxUDLPy."
+        "password": "$2b$12$xquMWGaUHpvncN0xuohWFOtgJ4ruQj7RaTfTRSDlVN23qyxUDLPy.",
+        "profile": "http://localhost:8080/images/default-picture.jpg"
     },
     {
         "id": "tthwyd0ol37doeor",
         "firstname": "Hello ",
         "lastname": "World",
         "username": "hello_world",
-        "password": "$2b$12$/ibaEUESfu0aOKYLb/WWY.OtqWAMjVuxCd8GKuRD3D43bLatUoI5K"
+        "password": "$2b$12$/ibaEUESfu0aOKYLb/WWY.OtqWAMjVuxCd8GKuRD3D43bLatUoI5K",
+        "profile": "http://localhost:8080/images/default-picture.jpg"
     }, {
         "id": "tthwyd7kl37doqum",
         "firstname": "Jacky",
         "lastname": "Du",
         "username": "jackyduuu",
-        "password": "$2b$12$3MYo0UAxj.wriza22cLxCOGfrPJTX22Bxkf4K39NA9VSq8o519sii"
+        "password": "$2b$12$3MYo0UAxj.wriza22cLxCOGfrPJTX22Bxkf4K39NA9VSq8o519sii",
+        "profile": "http://localhost:8080/images/default-picture.jpg"
     }, {
         "id": "tthwyelwl37etbit",
         "firstname": "test",
         "lastname": "ing",
         "username": "testing",
-        "password": "$2b$12$drlFfgbRJxKZ6f3O3HLG4.bEur93JJQ91kQRG8fC97UMAeHJ1j4KK"
+        "password": "$2b$12$drlFfgbRJxKZ6f3O3HLG4.bEur93JJQ91kQRG8fC97UMAeHJ1j4KK",
+        "profile": "http://localhost:8080/images/default-picture.jpg"
     }, {
         "id": "tthwyey4l37eueye",
         "firstname": "brain",
         "lastname": "station",
         "username": "brainstation",
-        "password": "$2b$12$c.Qm3y6dUwAnx2XF4BXZjOmcIFSCBl2QVktYYKUGhg4g6hlLlQXSq"
+        "password": "$2b$12$c.Qm3y6dUwAnx2XF4BXZjOmcIFSCBl2QVktYYKUGhg4g6hlLlQXSq",
+        "profile": "http://localhost:8080/images/default-picture.jpg"
+    }, {
+        "id": "tthwyf7gl38rm6u5",
+        "firstname": "testing",
+        "lastname": "testing",
+        "username": "testing123",
+        "password": "$2b$12$jr/fEA4ovUE2dHzq.hDvOu7NEf4Yh/3jnaoxzTmfRBGS5vqVy.XfO",
+        "profile": "http://localhost:8080/images/default-picture.jpg"
     }
 ]

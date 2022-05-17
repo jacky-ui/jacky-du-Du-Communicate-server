@@ -3,12 +3,15 @@ const app = express();
 require("dotenv").config();
 const { PORT } = process.env;
 const usersRoutes = require("./routes/usersRoutes");
+const dashbaordRoutes = require("./routes/dashboardRoutes");
 const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("assets"));
 
-app.use("/users/", usersRoutes)
+app.use("/users/", usersRoutes);
+app.use("/dashboard/", dashbaordRoutes);
 
 app.use("/", (_req, res) => {
     res.send("Welcome!")
