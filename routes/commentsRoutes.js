@@ -11,15 +11,25 @@ router.post("/post", (req, res) => {
         return res.status(400).send("Bad requests");
     }
 
-    const newComment = {
-        id: userId,
-        commentId: uniqid(),
-        username: username,
-        comment: comments,
-        profile: profilePicture
-    }
+    const commentsData = utils.readComments();
 
-    utils.writeComments(newComment);
+    // Create timestamp for comment
+    const timestamp = Date.now();
+    console.log(typeof(username));
+
+    const newComment =
+        {
+            id: userId,
+            commentId: uniqid(),
+            username: username,
+            comment: comments,
+            timestamp: timestamp,
+            profile: profilePicture
+        }
+
+    utils.writeComments(commentsData);
+    commentsData.push(newComment);
+    utils.writeComments(commentsData);
 
     res.status(201).send("Posted!");
 });
