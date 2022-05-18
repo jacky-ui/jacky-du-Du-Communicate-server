@@ -6,7 +6,6 @@ const utils = require("../utils");
 
 router.post("/post", (req, res) => {
     const { userId, profilePicture, comments, username } = req.body;
-    console.log(req.query)
 
     if (!userId || !profilePicture || !comments ||!username) {
         return res.status(400).send("Bad requests");
@@ -16,15 +15,17 @@ router.post("/post", (req, res) => {
 
     // Create timestamp for comment
     const timestamp = Date.now();
+    console.log(typeof(username));
 
-    const newComment = {
-        id: userId,
-        commentId: uniqid(),
-        username: username,
-        comment: comments,
-        timestamp: timestamp,
-        profile: profilePicture
-    }
+    const newComment =
+        {
+            id: userId,
+            commentId: uniqid(),
+            username: username,
+            comment: comments,
+            timestamp: timestamp,
+            profile: profilePicture
+        }
 
     utils.writeComments(commentsData);
     commentsData.push(newComment);

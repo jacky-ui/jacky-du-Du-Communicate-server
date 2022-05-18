@@ -1,1 +1,24 @@
-{"id":"tthwy218l37dnb7w","commentId":"tthwycbol3c5bk1t","username":"patrickstar","comment":"fgasdhgjkdfgbkdfbgkljdfge","profile":"http://localhost:8080/images/patrick.jpg"}
+[
+    {
+        "id": "tthwy218l37dnb7w",
+        "commentId": "tthwye3wl3c6kp6w",
+        "username": "patrickstar",
+        "comment": "fdsgdfgsdfggfsdgdfgsdggfdgsdfgfdsgd",
+        "timestamp": 1652914430598,
+        "profile": "http://localhost:8080/images/patrick.jpg"
+    }, {
+        "id": "tthwy218l37dnb7w",
+        "commentId": "tthwyff0l3c6u7bg",
+        "username": "patrickstar",
+        "comment": "fdsafdaafsdfasdfas",
+        "timestamp": 1652914873993,
+        "profile": "http://localhost:8080/images/patrick.jpg"
+    }, {
+        "id": "tthwy218l37dnb7w",
+        "commentId": "tthwycbol3c6uj3z",
+        "username": "patrickstar",
+        "comment": "hello world",
+        "timestamp": 1652914889277,
+        "profile": "http://localhost:8080/images/patrick.jpg"
+    }
+]
