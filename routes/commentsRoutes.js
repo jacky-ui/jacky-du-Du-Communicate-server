@@ -21,7 +21,6 @@ router.post("/post", (req, res) => {
 
     utils.writeComments(newComment);
 
-
     res.status(201).send("Posted!");
 });
 
