@@ -27,7 +27,7 @@ router.post("/signup", (req, res) => {
         username: username,
         password: hashedPassword
     }
-    console.log(newUser);
+
     utils.writeUsers(usersData);
     usersData.push(newUser);
     utils.writeUsers(usersData);

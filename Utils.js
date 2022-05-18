@@ -13,4 +13,16 @@ function writeUsers(newUser) {
     fs.writeFileSync("./data/users.json", stringifiedUsers);
 }
 
-module.exports = { readUsers, writeUsers };
+// function to parse comments JSON
+function readComments() {
+    const commentsJSON = fs.readFileSync("./data/comments.json");
+    const parsedComments = JSON.parse(commentsJSON);
+}
+
+// function to write in comments JSON
+function writeComments(comments) {
+    const stringifiedComment = JSON.stringify(comments);
+    fs.writeFileSync("./data/comments.json", stringifiedComment);
+}
+
+module.exports = { readUsers, writeUsers, readComments, writeComments };
