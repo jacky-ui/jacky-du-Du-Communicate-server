@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 router.use(express.json());
 const uniqid = require("uniqid");
+const authenticate = require("../middleware/authenticate");
 const utils = require("../utils");
 
+// Will take front-end POST request and add to comments JSON
 router.post("/post", (req, res) => {
     const { userId, profilePicture, comments, username } = req.body;
 
@@ -15,7 +17,6 @@ router.post("/post", (req, res) => {
 
     // Create timestamp for comment
     const timestamp = Date.now();
-    console.log(typeof(username));
 
     const newComment =
         {
@@ -28,10 +29,17 @@ router.post("/post", (req, res) => {
         }
 
     utils.writeComments(commentsData);
-    commentsData.push(newComment);
+    commentsData.unshift(newComment);
     utils.writeComments(commentsData);
 
     res.status(201).send("Posted!");
 });
+
+// Front-end request to get all comments in JSON
+router.get("/", authenticate, (_req, res) => {
+    const commentsJSON = utils.readComments();
+
+    res.status(200).json(commentsJSON);
+})
 
 module.exports = router;
