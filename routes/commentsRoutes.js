@@ -36,7 +36,7 @@ router.post("/post", (req, res) => {
 });
 
 // Front-end request to get all comments in JSON
-router.get("/", authenticate, (req, res) => {
+router.get("/", authenticate, (_req, res) => {
     const commentsJSON = utils.readComments();
 
     res.status(200).json(commentsJSON);
