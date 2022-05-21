@@ -44,8 +44,6 @@ router.post("/login", (req, res) => {
         return res.status(400).send("All fields are required");
     }
 
-    
-
     // Go through database, checks username and password and assigns it to a variable
     const dataBase = utils.readUsers();
     let foundUsername = dataBase.find((userName) => username === userName.username);
@@ -54,7 +52,7 @@ router.post("/login", (req, res) => {
     const convertedPassword = bcrypt.compareSync(password, foundUsername.password)
 
     // Once found username, will take username info and add to new array
-    let selectedUser = [foundUsername.username, convertedPassword, foundUsername.id];
+    let selectedUser = [foundUsername.username, convertedPassword, foundUsername.id, foundUsername.profile];
 
     // // Conditional to see if they match
     if ((selectedUser[1] === false)) {
@@ -63,7 +61,7 @@ router.post("/login", (req, res) => {
 
     // // Create token
     const token = jwt.sign(
-        { id: selectedUser[2], user: selectedUser[0] },
+        { id: selectedUser[2], user: selectedUser[0], profilePicture: selectedUser[3] },
         process.env.JWT_KEY,
         {expiresIn: "24h"}
     );
