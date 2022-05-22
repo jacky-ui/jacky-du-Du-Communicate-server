@@ -58,5 +58,11 @@
         "username": "testing123",
         "password": "$2b$12$jr/fEA4ovUE2dHzq.hDvOu7NEf4Yh/3jnaoxzTmfRBGS5vqVy.XfO",
         "profile": "http://localhost:8080/images/default-picture.jpg"
+    }, {
+        "id": "tthwyd18l3dseg5d",
+        "firstname": "Fish",
+        "lastname": "Taco",
+        "username": "fishtaco",
+        "password": "$2b$12$d00TmTfComel/IAdG6diCO91Es98BZtUbAIcn1nKfD5wWJamcuYxu"
     }
 ]
