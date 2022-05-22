@@ -7,6 +7,7 @@ const socketio = require("socket.io");
 const usersRoutes = require("./routes/usersRoutes");
 const dashbaordRoutes = require("./routes/dashboardRoutes");
 const commentsRoutes = require("./routes/commentsRoutes");
+const uniqid = require("uniqid");
 const cors = require("cors");
 
 app.use(cors());
@@ -23,27 +24,22 @@ const io = socketio(server, {
 });
 
 io.on("connection", (socket) => {
-    console.log("user connected");
 
     socket.on("send message", (data) => {
-        console.log(data);
+        data.id = uniqid();
+
+        io.emit("receive_message", data);
+    })
+
+    socket.on("join", (data) => {
+
+        io.emit("receive_member", data);
     })
 })
 
 app.use("/users/", usersRoutes);
 app.use("/dashboard/", dashbaordRoutes);
 app.use("/comments", commentsRoutes);
-
-// io.on("connection", socket => {
-//     // User enter chat
-//     socket.on("user", user => {});
-
-//     // When user sends message
-//     socket.on("message", message => {});
-
-//     // User leaves the chat
-//     socket.on("disconnect", () => {});
-// })
 
 app.use("/", (_req, res) => {
     res.send("Welcome!")
