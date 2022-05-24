@@ -5,6 +5,9 @@ router.use(express.json());
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const utils = require("../utils");
+const fileUpload = require("express-fileupload");
+const path = require("path");
+const { URL, PORT } = process.env;
 
 // Create new user
 router.post("/signup", (req, res) => {
@@ -33,6 +36,30 @@ router.post("/signup", (req, res) => {
     utils.writeUsers(usersData);
 
     res.status(201).send("Account created!");
+})
+
+// Route to add uploaded image from front-end to image folder
+router.post("/uploadimage", (req, res) => {
+    const imageData = req.files["image-field"];
+    const imageName = imageData.name;
+    const uploadPath = `images/${imageName}`;
+    imageData.mv(`${__dirname}/../assets/${uploadPath}`, function(err) {
+        if(err) {
+            console.log(err);
+            return res.status(500).send(err.message)
+        }
+        const imageURLPath = `${URL}:${PORT}/${uploadPath}`;
+        
+        const data = utils.readUsers();
+        const lastUser = data[data.length -1];
+        lastUser.profile = imageURLPath;
+        console.log(lastUser);
+
+        data.push(lastUser);
+        utils.writeUsers(data);
+        
+        return res.status(201).send(uploadPath);
+    })
 })
 
 // Will take in user login POST request and make sure they match data
@@ -68,5 +95,11 @@ router.post("/login", (req, res) => {
 
     res.json({ token });
 })
+
+// router.get("/test", (req, res) => {
+//     const userData = utils.readUsers();
+//     const lastItem = userData[userData.length -1];
+//     res.send(lastItem);
+// })
 
 module.exports = router;
