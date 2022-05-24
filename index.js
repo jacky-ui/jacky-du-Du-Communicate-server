@@ -9,8 +9,10 @@ const dashbaordRoutes = require("./routes/dashboardRoutes");
 const commentsRoutes = require("./routes/commentsRoutes");
 const uniqid = require("uniqid");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 
 app.use(cors());
+app.use(fileUpload());
 app.use(express.json());
 app.use(express.static("assets"));
 

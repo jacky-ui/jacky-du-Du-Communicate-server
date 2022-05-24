@@ -5,12 +5,25 @@ router.use(express.json());
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const utils = require("../utils");
+const fileUpload = require("express-fileupload");
+const path = require("path");
 
 // Create new user
+router.post("/uploadimage", (req, res) => {
+    const imageData = req.files["image-field"];
+    const imageName = imageData.name;
+    const uploadPath = `images/${imageName}`;
+    imageData.mv(`${__dirname}/../assets/${uploadPath}`, function(err) {
+        if(err) {
+            console.log(err);
+            return res.status(500).send(err.message)
+        }
+        return res.status(201).send(uploadPath);
+    })
+})
+
 router.post("/signup", (req, res) => {
-    console.log(req);
     const { firstName, lastName, username, password } = req.body;
-    // console.log( firstName, lastName, username, password );
 
     if (!firstName || !lastName || !username || !password) {
         return res.status(400).send("Please enter all required fields!")
