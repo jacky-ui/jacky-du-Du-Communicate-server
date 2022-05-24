@@ -5,12 +5,9 @@ router.use(express.json());
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const utils = require("../utils");
-const multer = require("multer");
-
-const upload = multer();
 
 // Create new user
-router.post("/signup", upload.single("profileImage"), (req, res) => {
+router.post("/signup", (req, res) => {
     console.log(req);
     const { firstName, lastName, username, password } = req.body;
     // console.log( firstName, lastName, username, password );
