@@ -7,8 +7,38 @@ const bcrypt = require('bcrypt');
 const utils = require("../utils");
 const fileUpload = require("express-fileupload");
 const path = require("path");
+const { URL, PORT } = process.env;
 
 // Create new user
+router.post("/signup", (req, res) => {
+    const { firstName, lastName, username, password } = req.body;
+    console.log( firstName, lastName, username, password );
+
+    if (!firstName || !lastName || !username || !password) {
+        return res.status(400).send("Please enter all required fields!")
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 12);
+    console.log(hashedPassword);
+    
+    const usersData = utils.readUsers();
+
+    const newUser = {
+        id: uniqid(),
+        firstname: firstName,
+        lastname: lastName,
+        username: username,
+        password: hashedPassword
+    }
+
+    utils.writeUsers(usersData);
+    usersData.push(newUser);
+    utils.writeUsers(usersData);
+
+    res.status(201).send("Account created!");
+})
+
+// Route to add uploaded image from front-end to image folder
 router.post("/uploadimage", (req, res) => {
     const imageData = req.files["image-field"];
     const imageName = imageData.name;
@@ -18,34 +48,18 @@ router.post("/uploadimage", (req, res) => {
             console.log(err);
             return res.status(500).send(err.message)
         }
+        const imageURLPath = `${URL}:${PORT}/${uploadPath}`;
+        
+        const data = utils.readUsers();
+        const lastUser = data[data.length -1];
+        lastUser.profile = imageURLPath;
+        console.log(lastUser);
+
+        data.push(lastUser);
+        utils.writeUsers(data);
+        
         return res.status(201).send(uploadPath);
     })
-})
-
-router.post("/signup", (req, res) => {
-    const { firstName, lastName, username, password } = req.body;
-
-    if (!firstName || !lastName || !username || !password) {
-        return res.status(400).send("Please enter all required fields!")
-    }
-
-    const hashedPassword = bcrypt.hashSync(password, 12);
-    
-    const usersData = utils.readUsers();
-
-    const newUser = {
-        id: uniqid(),
-        firstname: firstName,
-        lastname: lastName,
-        username: username,
-        password: hashedPassword,
-    }
-
-    utils.writeUsers(usersData);
-    usersData.push(newUser);
-    utils.writeUsers(usersData);
-
-    res.status(201).send("Account created!");
 })
 
 // Will take in user login POST request and make sure they match data
@@ -81,5 +95,11 @@ router.post("/login", (req, res) => {
 
     res.json({ token });
 })
+
+// router.get("/test", (req, res) => {
+//     const userData = utils.readUsers();
+//     const lastItem = userData[userData.length -1];
+//     res.send(lastItem);
+// })
 
 module.exports = router;
