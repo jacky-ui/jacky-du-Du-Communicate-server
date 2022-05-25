@@ -5,23 +5,30 @@ router.use(express.json());
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const utils = require("../utils");
-const fileUpload = require("express-fileupload");
 const path = require("path");
 const { URL, PORT } = process.env;
 
 // Create new user
 router.post("/signup", (req, res) => {
     const { firstName, lastName, username, password } = req.body;
-    console.log( firstName, lastName, username, password );
 
     if (!firstName || !lastName || !username || !password) {
         return res.status(400).send("Please enter all required fields!")
     }
 
-    const hashedPassword = bcrypt.hashSync(password, 12);
-    console.log(hashedPassword);
-    
     const usersData = utils.readUsers();
+
+    // Find and see if signup username matches any entries in JSON file
+    let foundUser = usersData.find((user) => user.username === username)
+    if (foundUser === undefined) {
+        foundUser = false;
+    }
+
+    if (foundUser === true || username) {
+        return res.status(400).send("Username taken!");
+    } else if (foundUser === false) {
+
+    const hashedPassword = bcrypt.hashSync(password, 12);
 
     const newUser = {
         id: uniqid(),
@@ -36,6 +43,7 @@ router.post("/signup", (req, res) => {
     utils.writeUsers(usersData);
 
     res.status(201).send("Account created!");
+    }
 })
 
 // Route to add uploaded image from front-end to image folder
@@ -45,7 +53,6 @@ router.post("/uploadimage", (req, res) => {
     const uploadPath = `images/${imageName}`;
     imageData.mv(`${__dirname}/../assets/${uploadPath}`, function(err) {
         if(err) {
-            console.log(err);
             return res.status(500).send(err.message)
         }
         const imageURLPath = `${URL}:${PORT}/${uploadPath}`;
@@ -53,7 +60,6 @@ router.post("/uploadimage", (req, res) => {
         const data = utils.readUsers();
         const lastUser = data[data.length -1];
         lastUser.profile = imageURLPath;
-        console.log(lastUser);
 
         data.push(lastUser);
         utils.writeUsers(data);
@@ -95,11 +101,5 @@ router.post("/login", (req, res) => {
 
     res.json({ token });
 })
-
-// router.get("/test", (req, res) => {
-//     const userData = utils.readUsers();
-//     const lastItem = userData[userData.length -1];
-//     res.send(lastItem);
-// })
 
 module.exports = router;
