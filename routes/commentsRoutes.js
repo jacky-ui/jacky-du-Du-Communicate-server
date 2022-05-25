@@ -42,4 +42,14 @@ router.get("/", authenticate, (_req, res) => {
     res.status(200).json(commentsJSON);
 })
 
+// Front-end request to get all comments by a user
+router.get("/:id", authenticate, (req, res) => {
+    const userId = req.params.id;
+
+    const userComments = utils.readComments();
+    const foundComments = userComments.filter((comment) => comment.id === userId);
+
+    res.status(200).send(foundComments);
+})
+
 module.exports = router;
