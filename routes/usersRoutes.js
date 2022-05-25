@@ -24,7 +24,8 @@ router.post("/signup", (req, res) => {
         foundUser = false;
     }
 
-    if (foundUser === true || username) {
+    console.log(foundUser);
+    if (foundUser === true) {
         return res.status(400).send("Username taken!");
     } else if (foundUser === false) {
 
