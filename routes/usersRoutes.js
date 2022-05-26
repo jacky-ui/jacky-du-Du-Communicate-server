@@ -48,6 +48,7 @@ router.post("/signup", (req, res) => {
 
 // Route to add uploaded image from front-end to image folder
 router.post("/uploadimage", (req, res) => {
+    console.log(req.files)
     const imageData = req.files["image-field"];
     const imageName = imageData.name;
     const uploadPath = `images/${imageName}`;
