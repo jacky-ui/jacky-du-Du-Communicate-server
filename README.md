@@ -38,7 +38,7 @@ Once cloned, you will need to insstall all the dependencies on the client and se
     
 Finally, to run Du-Communicate you would have to open your IDE, open the project folder if it isn't already open, then:
 
-    npx start
+    npx index.js
 
 ### `Environment Variables`
 
