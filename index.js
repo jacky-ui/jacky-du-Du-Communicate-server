@@ -39,6 +39,7 @@ io.on("connection", (socket) => {
     })
 })
 
+// Routes for different requests
 app.use("/users/", usersRoutes);
 app.use("/dashboard/", dashbaordRoutes);
 app.use("/comments", commentsRoutes);
