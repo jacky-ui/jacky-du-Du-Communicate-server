@@ -45,9 +45,19 @@ router.get("/", authenticate, (_req, res) => {
 // Front-end request to get all comments by a user
 router.get("/:id", authenticate, (req, res) => {
     const userId = req.params.id;
-
+    
     const userComments = utils.readComments();
     const foundComments = userComments.filter((comment) => comment.id === userId);
+    
+    if(foundComments.length === 0) {
+        const userData = utils.readUsers();
+        const foundUser = userData.filter((user) => user.id === userId);
+        const noUserComments = [{
+            message: "No posts yet!",
+            profile: foundUser[0].profile
+        }]
+       return res.status(200).send(noUserComments);
+    }
 
     res.status(200).send(foundComments);
 })
