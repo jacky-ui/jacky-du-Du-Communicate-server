@@ -41,6 +41,7 @@ router.post("/signup", (req, res) => {
     utils.writeUsers(usersData);
     usersData.push(newUser);
     utils.writeUsers(usersData);
+    console.log("Account Created");
 
     res.status(201).send("Account created!");
     }
@@ -48,7 +49,6 @@ router.post("/signup", (req, res) => {
 
 // Route to add uploaded image from front-end to image folder
 router.post("/uploadimage", (req, res) => {
-    console.log(req.files)
     const imageData = req.files["image-field"];
     const imageName = imageData.name;
     const uploadPath = `images/${imageName}`;
@@ -99,7 +99,7 @@ router.post("/login", (req, res) => {
         process.env.JWT_KEY,
         {expiresIn: "24h"}
     );
-
+    console.log("User logged in");
     res.json({ token });
 })
 
